@@ -1,9 +1,9 @@
 import React from "react";
 import image from "../../../assets/present.png";
-import { StartScreenProps } from "../../../types";
+import { EndScreenProps, StartScreenProps } from "../../../types";
 import "./EndScreen.scss";
 
-function EndScreen({ step, setStep }: StartScreenProps) {
+function EndScreen({ step, setStep, answerList, setAnswers }: EndScreenProps) {
   return (
     <div className="end-screen">
       <img src={image} alt="" className="start-screen__image" />
@@ -13,7 +13,14 @@ function EndScreen({ step, setStep }: StartScreenProps) {
       <div className="end-screen__text">
         Send the results to your email to receive special discounts.
       </div>
-      <button className="end-screen__start-button" onClick={() => setStep(0)}>
+      <button
+        className="end-screen__start-button"
+        onClick={() => {
+          console.log(answerList);
+          setAnswers([]);
+          setStep(0);
+        }}
+      >
         Send
       </button>
     </div>

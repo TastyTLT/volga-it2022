@@ -2,7 +2,13 @@ import React from "react";
 import { Question, QuestionScreenProps } from "../../../types";
 import "./QuestionScreen.scss";
 
-function QuestionScreen({ question, step, setStep }: QuestionScreenProps) {
+function QuestionScreen({
+  question,
+  step,
+  setStep,
+  answerList,
+  setAnswers,
+}: QuestionScreenProps) {
   const { text, answers, skip } = question;
 
   const answersClassname =
@@ -17,15 +23,27 @@ function QuestionScreen({ question, step, setStep }: QuestionScreenProps) {
       ? "screen__answer screen__answer_many"
       : "screen__answer";
 
+  const routeFunc = (index: number) => {
+    if (index === 1 && step === 9) {
+      setStep(11);
+      setAnswers([...answerList, index]);
+      return;
+    }
+
+    setStep((currentStep) => currentStep + 1);
+    setAnswers([...answerList, index]);
+  };
+
   return (
     <div className="screen">
       <div className="screen__body">
         <div className="screen__question">{text}</div>
         <div className={answersClassname}>
-          {answers.map(({ text, image }) => (
+          {answers.map(({ text, image }, index) => (
             <div
               className={answerClassname}
-              onClick={() => setStep((currentStep) => currentStep + 1)}
+              key={index}
+              onClick={() => routeFunc(index)}
             >
               {image && (
                 <img src={image} alt="" className="screen__answer-image" />

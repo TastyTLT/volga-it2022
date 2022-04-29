@@ -8,6 +8,7 @@ import "./QuizWidget.scss";
 
 function QuizWidget() {
   const [step, setStep] = useState(0);
+  const [answers, setAnswers] = useState<number[]>([]);
 
   return (
     <div className="quiz-widget">
@@ -16,12 +17,21 @@ function QuizWidget() {
       {step === 0 && <StartScreen step={step} setStep={setStep} />}
       {step > 0 && step < 11 && (
         <QuestionScreen
+          answerList={answers}
+          setAnswers={setAnswers}
           step={step}
           setStep={setStep}
           question={questions[step - 1]}
         />
       )}
-      {step === 11 && <EndScreen step={step} setStep={setStep} />}
+      {step === 11 && (
+        <EndScreen
+          step={step}
+          setStep={setStep}
+          answerList={answers}
+          setAnswers={setAnswers}
+        />
+      )}
     </div>
   );
 }

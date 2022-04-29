@@ -19,8 +19,17 @@ export interface StartScreenProps {
   setStep: React.Dispatch<React.SetStateAction<number>>;
 }
 
+export interface EndScreenProps {
+  step: number;
+  setStep: React.Dispatch<React.SetStateAction<number>>;
+  answerList: number[];
+  setAnswers: React.Dispatch<React.SetStateAction<number[]>>;
+}
+
 export interface QuestionScreenProps {
   step: number;
+  answerList: number[];
+  setAnswers: React.Dispatch<React.SetStateAction<number[]>>;
   setStep: React.Dispatch<React.SetStateAction<number>>;
   question: Question;
 }
