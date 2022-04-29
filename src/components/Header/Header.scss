@@ -1,0 +1,20 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 25px;
+
+  &__logo {
+  }
+
+  &__button-step,
+  &__button-close {
+    font-size: 30px;
+    background: transparent;
+    border: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

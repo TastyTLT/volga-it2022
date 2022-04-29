@@ -1,10 +1,12 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 import QuizWidget from './components/QuizWidget/QuizWidget';
 
 function App() {
-  return <QuizWidget />;
+  return (
+    <div className="container">
+      <QuizWidget />
+    </div>
+  );
 }
 
 export default App;

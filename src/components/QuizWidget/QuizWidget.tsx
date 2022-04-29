@@ -1,20 +1,20 @@
-import React from 'react';
-import styled from 'styled-components';
-import Header from '../Header/Header';
-import StartScreen from '../Screens/StartScreen';
-
-const Container = styled.div`
-  max-width: 375px;
-  display: flex;
-  flex-direction: column;
-`;
+import React, { useState } from "react";
+import questions from "../../questions";
+import Header from "../Header/Header";
+import QuestionScreen from "../Screens/QuestionScreen/QuestionScreen";
+import StartScreen from "../Screens/StartScreen/StartScreen";
+import "./QuizWidget.scss";
 
 function QuizWidget() {
+  const [step, setStep] = useState(0);
+
   return (
-    <Container>
-      <Header />
-      <StartScreen />
-    </Container>
+    <div className="quiz-widget">
+      <Header step={step} setStep={setStep} />
+
+      {step === 0 && <StartScreen step={step} setStep={setStep} />}
+      {step > 0 && <QuestionScreen {...questions[step - 1]} />}
+    </div>
   );
 }
 
