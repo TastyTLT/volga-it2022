@@ -6,15 +6,19 @@ import { HeaderProps } from "../../types";
 function Header({ step, setStep }: HeaderProps) {
   return (
     <div className="header">
-      {step === 0 && <img src={logo} alt="" className="header__logo" />}
-      {step > 0 && (
+      {(step === 0 || step === 11) && (
+        <img src={logo} alt="" className="header__logo" />
+      )}
+      {step > 0 && step < 11 && (
         <button
           className="header__button-step"
           onClick={() => setStep((currentStep) => currentStep - 1)}
         >{`<`}</button>
       )}
 
-      {step > 0 && <div className="header__step">{`${step} / 10`}</div>}
+      {step > 0 && step < 11 && (
+        <div className="header__step">{`${step} / 10`}</div>
+      )}
       {step === 0 && (
         <button
           className="header__button-step"

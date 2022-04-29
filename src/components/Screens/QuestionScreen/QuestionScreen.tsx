@@ -1,24 +1,46 @@
 import React from "react";
-import { Question } from "../../../types";
+import { Question, QuestionScreenProps } from "../../../types";
 import "./QuestionScreen.scss";
 
-function QuestionScreen({ text, answers, skip }: Question) {
+function QuestionScreen({ question, step, setStep }: QuestionScreenProps) {
+  const { text, answers, skip } = question;
+
+  const answersClassname =
+    answers.length > 3
+      ? "screen__answers screen__answers_many"
+      : "screen__answers";
+
+  const answerClassname =
+    answers.length === 3
+      ? "screen__answer screen__answer_three"
+      : answers.length > 3
+      ? "screen__answer screen__answer_many"
+      : "screen__answer";
+
   return (
     <div className="screen">
       <div className="screen__body">
         <div className="screen__question">{text}</div>
-        <div className="screen__ansawers">
+        <div className={answersClassname}>
           {answers.map(({ text, image }) => (
-            <div className="screen__answer">
+            <div
+              className={answerClassname}
+              onClick={() => setStep((currentStep) => currentStep + 1)}
+            >
               {image && (
                 <img src={image} alt="" className="screen__answer-image" />
               )}
-              <div className="screen__answer-text">{text}</div>
+              {text && <div className="screen__answer-text">{text}</div>}
             </div>
           ))}
         </div>
       </div>
-      <div className="screen__alternative">{skip}</div>
+      <div
+        className="screen__alternative"
+        onClick={() => setStep((currentStep) => currentStep + 1)}
+      >
+        {skip}
+      </div>
     </div>
   );
 }
